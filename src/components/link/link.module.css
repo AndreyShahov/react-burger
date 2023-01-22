@@ -1,0 +1,13 @@
+.box {
+  display: flex;
+  max-width: 178px;
+  width: 100%;
+  min-height: 56px;
+  justify-content: center;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
