@@ -1,8 +1,10 @@
 import React from 'react';
 import ingredientsStyles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import BurgerIngredient from '../burger-ingredient/burger-ingredient';
+import { isPropertySignature } from 'typescript';
 
-export default function BurgerIngredients() {
+export default function BurgerIngredients(props) {
   const [current, setCurrent] = React.useState('one')
 
   return (
@@ -20,9 +22,10 @@ export default function BurgerIngredients() {
             Начинки
           </Tab>
         </div>
-
-
+        <div className={ingredientsStyles.menu}>{props.children}</div>
       </section>
     </main>
   )
 }
+
+
