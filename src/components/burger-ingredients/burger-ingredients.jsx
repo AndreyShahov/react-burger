@@ -22,7 +22,7 @@ export default function BurgerIngredients(props) {
             Начинки
           </Tab>
         </div>
-        <div className={ingredientsStyles.menu}>{props.children}</div>
+        <div className={`${ingredientsStyles.menu} ml-4`}>{props.children}</div>
       </section>
     </main>
   )

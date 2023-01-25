@@ -11,5 +11,24 @@ flex-direction: column;
 }
 
 .menu {
-  min-height: 912px
+  height: 756px;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 24px;
+  column-gap: 24px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+
+}
+
+::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8585AD;
+  border: 3px solid #8585AD;
 }
