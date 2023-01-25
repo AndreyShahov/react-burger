@@ -4,7 +4,6 @@ import BurgerIngredient from '../burger-ingredient/burger-ingredient.jsx';
 import { config } from '../data/data.js';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components"
 
 
 function App() {
@@ -24,14 +23,12 @@ function App() {
         {
           ingredients &&
           ingredients.data.map(item => {
-            <BurgerIngredient image={item.image} price={item.price} name={item.name} />
+            return <BurgerIngredient {...item} key={item['_id']} />
           })
         }
       </BurgerIngredients>
     </>
   )
-
-
 }
 
 export default App;
