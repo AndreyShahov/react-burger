@@ -3,7 +3,6 @@ import { useRef } from 'react'
 import ingredientsStyles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredient from '../burger-ingredient/burger-ingredient';
-import { isPropertySignature } from 'typescript';
 
 export default function BurgerIngredients({ ingredients }) {
   const [current, setCurrent] = React.useState('one');
@@ -16,9 +15,7 @@ function handleClick(value, ref) {
   ref.current.scrollIntoView();
  }
 
-
   return (
-    <main className={ingredientsStyles.main}>
       <section className={`${ingredientsStyles.section} pt-10`}>
         <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
         <div className="mb-10" style={{ display: 'flex' }}>
@@ -61,7 +58,6 @@ function handleClick(value, ref) {
           </li>
         </ul>
       </section>
-    </main>
   )
 }
 

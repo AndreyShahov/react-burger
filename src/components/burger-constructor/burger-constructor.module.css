@@ -1,0 +1,13 @@
+.section {
+  max-width: 600px;
+  width: 100%;
+  min-height: 912px;
+  display: flex;
+  flex-direction: column;
+  }
+
+  .container {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }

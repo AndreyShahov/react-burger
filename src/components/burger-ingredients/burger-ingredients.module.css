@@ -1,11 +1,6 @@
-.main {
-  width: calc(100% - 40px);
-}
-
 .section {
 max-width: 600px;
 width: 100%;
-min-height: 912px;
 display: flex;
 flex-direction: column;
 }
@@ -28,7 +23,6 @@ flex-direction: column;
 
 ::-webkit-scrollbar {
   width: 8px;
-
 }
 
 ::-webkit-scrollbar-track {
