@@ -1,16 +1,47 @@
 import constructorStyles from './burger-constructor.module.css';
-import BurgerSmallIngredient from '../burger-small-ingredient/burger-small-ingredient';
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export default function BurgerConstructor({ ingredients }) {
   return (
-    <section className={constructorStyles.section}>
+    <section className={`${constructorStyles.section} mt-25`}>
+      <div className="mr-4">
+        {ingredients &&
+          <ConstructorElement
+            type="top"
+            isLocked={true}
+            text={ingredients.data[0].name + ' (верх)'}
+            price={ingredients.data[0].price}
+            thumbnail={ingredients.data[0].image_mobile}
+          />
+        }
+      </div>
       <ul className={constructorStyles.container}>
         {ingredients &&
-          ingredients.data.map(item => {
-           return <BurgerSmallIngredient {...item} key={item['_id']} />
+          ingredients.data.slice(2).map(item => {
+            return (
+              <li className={constructorStyles.component}>
+                <DragIcon type="primary" />
+                <ConstructorElement
+                  text={item.name}
+                  price={item.price}
+                  thumbnail={item.image_mobile}
+                  key={item['_id']}
+                />
+              </li>
+            )
           })}
       </ul>
+      <div className="mr-4">
+        {ingredients &&
+          <ConstructorElement
+            type="bottom"
+            isLocked={true}
+            text={ingredients.data[0].name + ' (низ)'}
+            price={ingredients.data[0].price}
+            thumbnail={ingredients.data[0].image_mobile}
+          />
+        }
+      </div>
     </section>
   )
 }
