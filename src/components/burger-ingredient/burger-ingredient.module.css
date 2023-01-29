@@ -11,15 +11,13 @@
   row-gap: 4px;
 }
 
-.counter {
-  min-height: 32px;
+.image {
+  height: 120px;
 }
 
 .box {
-  max-width: 62px;
-  width: 100%;
   display: flex;
-  justify-content: space-between;
+  column-gap: 8px;
 }
 
 .price {
@@ -27,6 +25,7 @@
 }
 
 .name {
+  min-height: 48px;
   margin: 0;
   text-align: center;
 }

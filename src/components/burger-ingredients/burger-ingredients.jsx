@@ -18,7 +18,7 @@ function handleClick(value, ref) {
   return (
       <section className={`${ingredientsStyles.section} pt-10`}>
         <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
-        <div className="mb-10" style={{ display: 'flex' }}>
+        <div style={{ display: 'flex' }}>
           <Tab value="one" active={current === 'one'} onClick={(value) => handleClick(value, bunRef)}>
             Булки
           </Tab>
@@ -31,7 +31,7 @@ function handleClick(value, ref) {
         </div>
         <ul className={`${ingredientsStyles.menu} ml-4`}>
           <li>
-            <h2  ref={bunRef}>Булки</h2>
+            <h2 className="text text_type_main-medium mt-10 mb-6" ref={bunRef}>Булки</h2>
             <div className={ingredientsStyles.container}>
               {ingredients &&
                 ingredients.data.filter(item => item.type == 'bun').map(item => {
@@ -40,7 +40,7 @@ function handleClick(value, ref) {
             </div>
           </li>
           <li>
-            <h2 ref={sauceRef}>Соусы</h2>
+            <h2 className="text text_type_main-medium mt-10 mb-6" ref={sauceRef}>Соусы</h2>
             <div className={ingredientsStyles.container}>
               {ingredients &&
                 ingredients.data.filter(item => item.type == 'sauce').map(item => {
@@ -49,7 +49,7 @@ function handleClick(value, ref) {
             </div>
           </li>
           <li>
-            <h2 ref={mainRef}>Начинки</h2>
+            <h2 className="text text_type_main-medium mt-10 mb-6" ref={mainRef}>Начинки</h2>
             <div className={ingredientsStyles.container}>
               {ingredients &&
                 ingredients.data.filter(item => item.type == 'main').map(item => {
