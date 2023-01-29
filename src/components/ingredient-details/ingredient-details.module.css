@@ -4,7 +4,17 @@
   list-style-type: none;
 }
 
-.nutritionvalues {
-display: flex;
-column-gap: 20px;
+.nutrition {
+  max-width: 516px;
+  width: 100%;
+  min-height: 56px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.value {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }

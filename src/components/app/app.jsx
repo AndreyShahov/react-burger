@@ -28,7 +28,7 @@ function App() {
         <BurgerIngredients ingredients={ingredients} />
         <BurgerConstructor ingredients={ingredients} />
       </main>
-      <Modal>
+      <Modal header="Детали ингредиента">
          {ingredients &&
          <IngredientDetails {...ingredients.data[5]} />}
       </Modal>

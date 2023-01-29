@@ -7,8 +7,8 @@ export default function Modal(props) {
     <section>
       <ModalOverlay />
       <ul className={modalStyles.modal}>
-        <li className={modalStyles.box}>
-          <h2 className={`${modalStyles.header} mt-10`}></h2>
+        <li className={`${modalStyles.box} mt-10`}>
+          <h2 className={`${modalStyles.header} text text_type_main-large`}>{props.header}</h2>
           <CloseIcon />
         </li>
         <li>{props.children}</li>
