@@ -16,8 +16,8 @@ function handleClick(value, ref) {
  }
 
   return (
-      <section className={`${ingredientsStyles.section} pt-10`}>
-        <h1 className="text text_type_main-large mb-5">Соберите бургер</h1>
+      <section className={ingredientsStyles.section}>
+        <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
         <div style={{ display: 'flex' }}>
           <Tab value="one" active={current === 'one'} onClick={(value) => handleClick(value, bunRef)}>
             Булки

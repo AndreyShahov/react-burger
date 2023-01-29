@@ -19,13 +19,12 @@ export default function BurgerConstructor({ ingredients }) {
         {ingredients &&
           ingredients.data.slice(2).map(item => {
             return (
-              <li className={constructorStyles.component}>
+              <li className={constructorStyles.component} key={item['_id']}>
                 <DragIcon type="primary" />
                 <ConstructorElement
                   text={item.name}
                   price={item.price}
                   thumbnail={item.image_mobile}
-                  key={item['_id']}
                 />
               </li>
             )
