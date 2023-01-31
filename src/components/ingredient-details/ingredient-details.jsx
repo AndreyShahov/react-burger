@@ -1,6 +1,4 @@
 import styles from './ingredient-details.module.css';
-import Modal from '../modal/modal.jsx';
-import ModalOverlay from '../modal-overlay/modal-overlay.jsx';
 
 export default function IngredientDetails({ image_large, name, calories, proteins, fat, carbohydrates }) {
   return (

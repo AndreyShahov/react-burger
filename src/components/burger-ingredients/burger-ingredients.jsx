@@ -33,8 +33,7 @@ function handleClick(value, ref) {
           <li>
             <h2 className="text text_type_main-medium mt-10 mb-6" ref={bunRef}>Булки</h2>
             <div className={ingredientsStyles.container}>
-              {ingredients &&
-                ingredients.data.filter(item => item.type == 'bun').map(item => {
+              {ingredients.data.filter(item => item.type == 'bun').map(item => {
                   return <BurgerIngredient {...item} key={item['_id']} />
                 })}
             </div>
@@ -42,8 +41,7 @@ function handleClick(value, ref) {
           <li>
             <h2 className="text text_type_main-medium mt-10 mb-6" ref={sauceRef}>Соусы</h2>
             <div className={ingredientsStyles.container}>
-              {ingredients &&
-                ingredients.data.filter(item => item.type == 'sauce').map(item => {
+              {ingredients.data.filter(item => item.type == 'sauce').map(item => {
                   return <BurgerIngredient {...item} key={item['_id']} />
                 })}
             </div>
@@ -51,8 +49,7 @@ function handleClick(value, ref) {
           <li>
             <h2 className="text text_type_main-medium mt-10 mb-6" ref={mainRef}>Начинки</h2>
             <div className={ingredientsStyles.container}>
-              {ingredients &&
-                ingredients.data.filter(item => item.type == 'main').map(item => {
+              {ingredients.data.filter(item => item.type == 'main').map(item => {
                   return <BurgerIngredient {...item} key={item['_id']} />
                 })}</div>
           </li>
@@ -60,5 +57,3 @@ function handleClick(value, ref) {
       </section>
   )
 }
-
-

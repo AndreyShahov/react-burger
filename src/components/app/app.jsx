@@ -12,6 +12,7 @@ import ModalOverlay from '../modal-overlay/modal-overlay.jsx';
 
 function App() {
   const [ingredients, setIngredients] = useState(null);
+  const [isModal, setIsModal] = useState(false);
 
   useEffect(() => {
     getIngredients(config)
@@ -21,21 +22,25 @@ function App() {
       .catch(err => console.log(err));
   }, [])
 
-  return (
+  return ingredients ? (
     <>
       <AppHeader />
       <main className={appStyles.main}>
         <BurgerIngredients ingredients={ingredients} />
         <BurgerConstructor ingredients={ingredients} />
       </main>
-      <Modal header="Детали ингредиента">
-         {ingredients &&
-         <IngredientDetails {...ingredients.data[5]} />}
-      </Modal>
+      {isModal &&
+        <Modal header="Детали ингредиента">
+          {/* {ingredients.data.map(item => {
+            <IngredientDetails {...item} key={item['_id']} />
+          })} */}
+          <IngredientDetails {...ingredients.data[4]} />
+
+        </Modal>}
     </>
-  )
+  ) : (
+    <p>Загрузка...</p>
+  );
 }
 
 export default App;
-
-
