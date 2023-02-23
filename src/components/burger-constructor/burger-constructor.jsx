@@ -1,5 +1,6 @@
 import constructorStyles from './burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { PropTypes } from 'prop-types';
 
 export default function BurgerConstructor({ ingredients, setIsModal }) {
   function handleCLick() {
@@ -54,3 +55,9 @@ export default function BurgerConstructor({ ingredients, setIsModal }) {
     </section>
   )
 }
+
+BurgerConstructor.propTypes = {
+  ingredients: PropTypes.object,
+  setIsModal: PropTypes.func
+}
+

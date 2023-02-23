@@ -1,4 +1,5 @@
 import linkStyles from './link.module.css';
+import PropTypes from 'prop-types';
 
 export default function Link({ icon, name, color}) {
   return (
@@ -10,4 +11,8 @@ export default function Link({ icon, name, color}) {
 }
 
 
-
+Link.propTypes = {
+  icon: PropTypes.element,
+  name: PropTypes.string,
+  color: PropTypes.string
+}
