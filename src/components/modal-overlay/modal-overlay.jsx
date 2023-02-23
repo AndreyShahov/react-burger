@@ -1,7 +1,7 @@
 import overlayStyles from "./modal-overlay.module.css"
 
-export default function ModalOverlay() {
+export default function ModalOverlay({onClick}) {
  return (
-  <div className={overlayStyles.overlay}></div>
+  <div className={overlayStyles.overlay} onClick={onClick}></div>
  )
 }

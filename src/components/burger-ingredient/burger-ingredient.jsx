@@ -1,5 +1,6 @@
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientStyles from "./burger-ingredient.module.css";
+import {  handleClick } from '../modal/modal.jsx'
 
 export default function BurgerIngredient({  ingredientData, count, onClick, setIsModal}) {
   const { image, price, name } = ingredientData;

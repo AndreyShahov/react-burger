@@ -1,6 +1,7 @@
 import styles from './order-details.module.css';
 
 export function OrderDetails() {
+
   return (
     <div className={styles.container}>
       <p className="text text_type_digits-large mt-6 mb-8">034536</p>

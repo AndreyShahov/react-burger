@@ -1,7 +1,11 @@
 import constructorStyles from './burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-export default function BurgerConstructor({ ingredients }) {
+export default function BurgerConstructor({ ingredients, setIsModal }) {
+  function handleCLick() {
+    setIsModal(true);
+  }
+
   return (
     <section className={`${constructorStyles.section} mt-25`}>
       <div className="mr-4">
@@ -42,7 +46,7 @@ export default function BurgerConstructor({ ingredients }) {
           <CurrencyIcon type="primary" />
         </li>
         <li>
-          <Button htmlType="button" type="primary" size="large">
+          <Button htmlType="button" type="primary" size="large" onClick={handleCLick}>
             Оформить заказ
           </Button>
         </li>
