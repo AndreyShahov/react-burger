@@ -1,0 +1,14 @@
+.container {
+  text-align: center;
+}
+
+.icon {
+  background-image: url('../../images/done.gif');
+  max-width: 120px;
+  width: 100%;
+  min-height: 120px;
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto 60px;
+}
+

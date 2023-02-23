@@ -5,10 +5,8 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import appStyles from './app.module.css';
 import BurgerConstructor from '../burger-constructor/burger-constructor.jsx';
-import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
+import { OrderDetails } from '../order-details/order-details.jsx';
 import Modal from '../modal/modal.jsx';
-import ModalOverlay from '../modal-overlay/modal-overlay.jsx';
-
 
 function App() {
   const [ingredients, setIngredients] = useState(null);
@@ -27,6 +25,9 @@ function App() {
       <main className={appStyles.main}>
         <BurgerIngredients ingredients={ingredients} />
         <BurgerConstructor ingredients={ingredients} />
+        <Modal>
+          <OrderDetails />
+        </Modal>
       </main>
     </>
   ) : (

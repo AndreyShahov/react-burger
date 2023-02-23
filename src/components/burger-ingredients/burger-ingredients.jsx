@@ -5,6 +5,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredient from '../burger-ingredient/burger-ingredient';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
+import { OrderDetails } from '../order-details/order-details';
 
 export default function BurgerIngredients({ ingredients }) {
   const [current, setCurrent] = React.useState('one');
