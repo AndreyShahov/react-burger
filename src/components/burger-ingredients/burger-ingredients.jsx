@@ -20,7 +20,6 @@ export default function BurgerIngredients({ ingredients }) {
   const bunArray = ingredients.data.filter(item => item.type == 'bun');
   const sauceArray = ingredients.data.filter(item => item.type == 'sauce');
   const mainArray = ingredients.data.filter(item => item.type == 'main');
-  const ingredientsArray = [...bunArray, ...sauceArray, ...mainArray];
 
   function handleClick(value, ref) {
     setCurrent(value);
@@ -50,6 +49,7 @@ export default function BurgerIngredients({ ingredients }) {
                 <BurgerIngredient
                   ingredientData={item}
                   key={item['_id']}
+                  count={1}
                   onClick={setIngredientInModal}
                   setIsModal={setIsModal}
                 />
@@ -65,6 +65,7 @@ export default function BurgerIngredients({ ingredients }) {
                 <BurgerIngredient
                   ingredientData={item}
                   key={item['_id']}
+                  count={1}
                   onClick={setIngredientInModal}
                   setIsModal={setIsModal}
                 />
@@ -80,6 +81,7 @@ export default function BurgerIngredients({ ingredients }) {
                 <BurgerIngredient
                   ingredientData={item}
                   key={item['_id']}
+                  count={1}
                   onClick={setIngredientInModal}
                   setIsModal={setIsModal}
                 />
@@ -99,5 +101,8 @@ export default function BurgerIngredients({ ingredients }) {
 }
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.object
+  ingredients: PropTypes.shape({
+    success: PropTypes.bool,
+    data: PropTypes.array
+  })
 };

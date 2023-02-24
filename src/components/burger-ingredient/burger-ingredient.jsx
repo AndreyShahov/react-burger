@@ -2,7 +2,7 @@ import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-c
 import ingredientStyles from "./burger-ingredient.module.css";
 import PropTypes from 'prop-types';
 
-export default function BurgerIngredient({ ingredientData, onClick, setIsModal }) {
+export default function BurgerIngredient({ ingredientData, count, onClick, setIsModal }) {
   const { image, price, name } = ingredientData;
 
   function handleClick() {
@@ -18,13 +18,17 @@ export default function BurgerIngredient({ ingredientData, onClick, setIsModal }
         <div><CurrencyIcon type="primary" /></div>
       </li>
       <li><h3 className={`${ingredientStyles.name} text text_type_main-default`}>{name}</h3></li>
-      <li><Counter count={1} size="default" extraClass="m-1" /></li>
+      <li><Counter count={count} size="default" extraClass="m-1" /></li>
     </ul>
   )
 }
 
 BurgerIngredient.propTypes = {
-  ingredientData: PropTypes.object,
+  ingredientData: PropTypes.shape({
+    image: PropTypes.string,
+    price: PropTypes.number,
+    name: PropTypes.string
+  }),
   onClick: PropTypes.func,
   setIsModal: PropTypes.func
 };

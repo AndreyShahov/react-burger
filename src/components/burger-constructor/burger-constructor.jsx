@@ -57,7 +57,10 @@ export default function BurgerConstructor({ ingredients, setIsModal }) {
 }
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.object,
+  ingredients: PropTypes.shape({
+    success: PropTypes.bool,
+    data: PropTypes.array
+  }),
   setIsModal: PropTypes.func
 }
 
