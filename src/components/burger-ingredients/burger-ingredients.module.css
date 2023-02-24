@@ -16,12 +16,6 @@
   flex-direction: column;
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px 24px;
-}
-
 ::-webkit-scrollbar {
   width: 8px;
 }
