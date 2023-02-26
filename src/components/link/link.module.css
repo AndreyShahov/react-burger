@@ -1,0 +1,10 @@
+.box {
+  display: flex;
+  min-height: 56px;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}

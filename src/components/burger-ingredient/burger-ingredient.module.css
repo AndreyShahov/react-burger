@@ -1,0 +1,31 @@
+.card {
+  margin: 0;
+  padding: 0;
+  max-width: 272px;
+  width: 100%;
+  list-style-type: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 4px;
+}
+
+.image {
+  height: 120px;
+}
+
+.box {
+  display: flex;
+  column-gap: 8px;
+}
+
+.price {
+  margin: 0;
+}
+
+.name {
+  min-height: 48px;
+  margin: 0;
+  text-align: center;
+}
