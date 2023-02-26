@@ -1,5 +1,4 @@
-import React from 'react';
-import { useRef, useState } from 'react'
+import { useRef, useState, useMemo } from 'react'
 import ingredientsStyles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Modal } from '../modal/modal';
@@ -8,7 +7,7 @@ import PropTypes from 'prop-types';
 import { IngredientCategory } from '../ingredient-category/ingredient-category';
 
 export default function BurgerIngredients({ ingredients }) {
-  const [current, setCurrent] = React.useState('one');
+  const [current, setCurrent] = useState('one');
   const [isModal, setIsModal] = useState(false);
 
   const bunRef = useRef(null);
@@ -17,24 +16,24 @@ export default function BurgerIngredients({ ingredients }) {
 
   const [ingredientInModal, setIngredientInModal] = useState(null);
 
-  const bunArray = React.useMemo(
+  const bunArray = useMemo(
     () => ingredients.data.filter(item => item.type == 'bun'),
     [ingredients]
   );
 
-  const sauceArray = React.useMemo(
+  const sauceArray = useMemo(
     () => ingredients.data.filter(item => item.type == 'sauce'),
     [ingredients]
   );
 
-  const mainArray = React.useMemo(
+  const mainArray = useMemo(
     () => ingredients.data.filter(item => item.type == 'main'),
     [ingredients]
   );
 
   function handleClick(value, ref) {
     setCurrent(value);
-    ref.current.scrollIntoView();
+    ref.current.scrollIntoView({ block: 'start', behavior: 'smooth' });
   }
 
   return (
@@ -87,6 +86,24 @@ export default function BurgerIngredients({ ingredients }) {
 BurgerIngredients.propTypes = {
   ingredients: PropTypes.shape({
     success: PropTypes.bool,
-    data: PropTypes.array
+    data: PropTypes.shape([{
+      calories: PropTypes.number,
+      carbohydrates: PropTypes.number,
+      fat: PropTypes.number,
+      image: PropTypes.string,
+      image_large: PropTypes.string,
+      image_mobile: PropTypes.string,
+      name: PropTypes.string,
+      price: PropTypes.number,
+      proteins: PropTypes.number,
+      type: PropTypes.string,
+      __v: PropTypes.number,
+      _id: PropTypes.string
+    }])
   })
 };
+
+
+
+
+

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getIngredients } from '../api/api.js';
-import { config } from '../data/data.js';
+import { config } from '../../configs/configs';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import appStyles from './app.module.css';
