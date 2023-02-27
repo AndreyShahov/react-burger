@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import constructorStyles from './burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { PropTypes } from 'prop-types';
+import { item } from '../burger-ingredients/burger-ingredients';
 
 export default function BurgerConstructor({ ingredients, setIsModal }) {
   const bun = useMemo(
@@ -84,11 +85,10 @@ export default function BurgerConstructor({ ingredients, setIsModal }) {
   )
 }
 
-// BurgerConstructor.propTypes = {
-//   ingredients: PropTypes.shape({
-//     success: PropTypes.bool,
-//     data: PropTypes.array
-//   }),
-//   setIsModal: PropTypes.func
-// }
+BurgerConstructor.propTypes = {
+  ingredients: PropTypes.shape({
+    success: PropTypes.bool,
+    data: PropTypes.arrayOf(item)
+  })
+};
 

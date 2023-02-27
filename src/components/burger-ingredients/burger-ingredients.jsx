@@ -83,23 +83,26 @@ export default function BurgerIngredients({ ingredients }) {
   )
 }
 
+export const item = PropTypes.shape({
+  calories: PropTypes.number,
+  carbohydrates: PropTypes.number,
+  fat: PropTypes.number,
+  image: PropTypes.string,
+  image_large: PropTypes.string,
+  image_mobile: PropTypes.string,
+  name: PropTypes.string,
+  price: PropTypes.number,
+  proteins: PropTypes.number,
+  type: PropTypes.string,
+  __v: PropTypes.number,
+  _id: PropTypes.string
+}
+)
+
 BurgerIngredients.propTypes = {
   ingredients: PropTypes.shape({
     success: PropTypes.bool,
-    data: PropTypes.shape([{
-      calories: PropTypes.number,
-      carbohydrates: PropTypes.number,
-      fat: PropTypes.number,
-      image: PropTypes.string,
-      image_large: PropTypes.string,
-      image_mobile: PropTypes.string,
-      name: PropTypes.string,
-      price: PropTypes.number,
-      proteins: PropTypes.number,
-      type: PropTypes.string,
-      __v: PropTypes.number,
-      _id: PropTypes.string
-    }])
+    data: PropTypes.arrayOf(item)
   })
 };
 
