@@ -7,15 +7,19 @@ import appStyles from './app.module.css';
 import BurgerConstructor from '../burger-constructor/burger-constructor.jsx';
 import { OrderDetails } from '../order-details/order-details.jsx';
 import { Modal } from '../modal/modal.jsx';
+import { useSelector, useDispatch } from 'react-redux';
+import { setItems } from '../../services/slices/ingredientsSlice.js';
 
 function App() {
-  const [ingredients, setIngredients] = useState(null);
+  const ingredients = useSelector(state => state.ingredientsReducer.items);
+  const dispatch = useDispatch();
+
   const [isModal, setIsModal] = useState(false);
 
   useEffect(() => {
     getIngredients(config)
       .then(res => {
-        setIngredients(res);
+        dispatch(setItems(res));
       })
       .catch(err => console.log(err));
   }, [])
@@ -25,7 +29,7 @@ function App() {
       <AppHeader />
       <main className={appStyles.main}>
         <BurgerIngredients ingredients={ingredients} />
-        <BurgerConstructor ingredients={ingredients} setIsModal={setIsModal}/>
+        <BurgerConstructor ingredients={ingredients} setIsModal={setIsModal} />
         {isModal &&
           <Modal setIsModal={setIsModal}>
             <OrderDetails />

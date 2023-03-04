@@ -1,5 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
+import ingredientsReducer from './slices/ingredientsSlice'
 
-const store = configureStore({
-  reducer: rootReducer
-})
+export const store = configureStore({
+  reducer: { ingredientsReducer },
+});
+
+
