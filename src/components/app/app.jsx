@@ -1,42 +1,38 @@
 import { useState, useEffect } from 'react';
 import { getIngredients } from '../api/api.js';
-import { config } from '../data/data.js';
+import { config } from '../../configs/configs';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import appStyles from './app.module.css';
 import BurgerConstructor from '../burger-constructor/burger-constructor.jsx';
-import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
-import Modal from '../modal/modal.jsx';
-import ModalOverlay from '../modal-overlay/modal-overlay.jsx';
-
+import { OrderDetails } from '../order-details/order-details.jsx';
+import { Modal } from '../modal/modal.jsx';
+import { useSelector, useDispatch } from 'react-redux';
+import { setItems } from '../../services/slices/ingredientsSlice.js';
+import { fetchIngredients } from '../../services/slices/ingredientsSlice.js';
 
 function App() {
-  const [ingredients, setIngredients] = useState(null);
+  const ingredients = useSelector(state => state.ingredientsReducer.items);
+  
+  const dispatch = useDispatch();
+
   const [isModal, setIsModal] = useState(false);
 
   useEffect(() => {
-    getIngredients(config)
-      .then(res => {
-        setIngredients(res);
-      })
-      .catch(err => console.log(err));
-  }, [])
+    dispatch(fetchIngredients());
+  }, []);
 
   return ingredients ? (
     <>
       <AppHeader />
       <main className={appStyles.main}>
-        <BurgerIngredients ingredients={ingredients} />
-        <BurgerConstructor ingredients={ingredients} />
+        <BurgerIngredients />
+        <BurgerConstructor setIsModal={setIsModal} />
+        {isModal &&
+          <Modal setIsModal={setIsModal}>
+            <OrderDetails />
+          </Modal>}
       </main>
-      {isModal &&
-        <Modal header="Детали ингредиента">
-          {/* {ingredients.data.map(item => {
-            <IngredientDetails {...item} key={item['_id']} />
-          })} */}
-          <IngredientDetails {...ingredients.data[4]} />
-
-        </Modal>}
     </>
   ) : (
     <p>Загрузка...</p>
