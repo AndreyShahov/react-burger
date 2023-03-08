@@ -5,8 +5,11 @@ import { Modal } from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import PropTypes from 'prop-types';
 import { IngredientCategory } from '../ingredient-category/ingredient-category';
+import { useSelector } from 'react-redux';
 
-export default function BurgerIngredients({ ingredients }) {
+export default function BurgerIngredients() {
+  const ingredients = useSelector(state => state.ingredientsReducer.items);
+
   const [current, setCurrent] = useState('one');
   const [isModal, setIsModal] = useState(false);
 
@@ -105,8 +108,3 @@ BurgerIngredients.propTypes = {
     data: PropTypes.arrayOf(item)
   })
 };
-
-
-
-
-

@@ -1,12 +1,30 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchIngredients = createAsyncThunk('ingredients/fetchIngredientsGet', async () => {
+export const fetchIngredients = createAsyncThunk(
+  'ingredients/fetchIngredients',
+  async function (_, { rejectWithValue }) {
+    try {
+      const response = await fetch('https://norma.nomoreparties.space/api/ingredients');
 
-});
+      if (!response.ok) {
+        throw new Error('Server Error');
+      }
+
+       const data = await response.json();
+
+      return data;
+
+
+    } catch (error) {
+      return (rejectWithValue(error.message));
+    }
+  }
+);
 
 const initialState = {
   items: null,
-  status: ''
+  loading: false,
+  error: false
 }
 
 export const ingredientsSlice = createSlice({
@@ -14,26 +32,28 @@ export const ingredientsSlice = createSlice({
   initialState,
   reducers: {
     setItems(state, action) {
-      state.items = action.payload
+      state.items = action.payload;
     }
-  }, extraReducers: {
+  },
+  extraReducers: {
     [fetchIngredients.pending]: (state) => {
-      state.status = 'loading';
-      state.items = null;
+      state.loading = true;
+      state.error = false;
     },
     [fetchIngredients.fulfilled]: (state, action) => {
+      state.loading = false;
       state.items = action.payload;
-      state.status = 'success';
+
     },
-    [fetchIngredients.rejected]: (state) => {
-      state.status = 'error';
-      state.items = null;
+    [fetchIngredients.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
     }
+
   }
 })
+
 
 export const { setItems } = ingredientsSlice.actions;
 
 export default ingredientsSlice.reducer;
-
-

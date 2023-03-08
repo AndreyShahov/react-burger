@@ -3,8 +3,11 @@ import constructorStyles from './burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { PropTypes } from 'prop-types';
 import { item } from '../burger-ingredients/burger-ingredients';
+import { useSelector } from 'react-redux';
 
-export default function BurgerConstructor({ ingredients, setIsModal }) {
+export default function BurgerConstructor({ setIsModal }) {
+  const ingredients = useSelector(state => state.ingredientsReducer.items);
+
   const bun = useMemo(
     () => ingredients.data.find(item => item.type == 'bun'),
     [ingredients]
@@ -91,4 +94,3 @@ BurgerConstructor.propTypes = {
     data: PropTypes.arrayOf(item)
   })
 };
-
