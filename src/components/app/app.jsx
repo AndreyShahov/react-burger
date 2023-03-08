@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { getIngredients } from '../api/api.js';
-import { config } from '../../configs/configs';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import appStyles from './app.module.css';
@@ -8,11 +6,14 @@ import BurgerConstructor from '../burger-constructor/burger-constructor.jsx';
 import { OrderDetails } from '../order-details/order-details.jsx';
 import { Modal } from '../modal/modal.jsx';
 import { useSelector, useDispatch } from 'react-redux';
-import { setItems } from '../../services/slices/ingredientsSlice.js';
 import { fetchIngredients } from '../../services/slices/ingredientsSlice.js';
+import { fetchConstructor } from '../../services/slices/constructorSlice';
 
 function App() {
   const ingredients = useSelector(state => state.ingredientsReducer.items);
+  const constructor = useSelector(state => state.constructorReducer.items);
+
+  const { loading, error } = useSelector(state => state.ingredientsReducer);
 
   const dispatch = useDispatch();
 
@@ -20,14 +21,18 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchIngredients());
+    dispatch(fetchConstructor());
   }, []);
 
   return ingredients ? (
+    ingredients &&
     <>
+
+      {error && <p>An error occured: {error}</p>}
       <AppHeader />
       <main className={appStyles.main}>
         <BurgerIngredients />
-        <BurgerConstructor setIsModal={setIsModal} />
+        {constructor && <BurgerConstructor setIsModal={setIsModal} />}
         {isModal &&
           <Modal setIsModal={setIsModal}>
             <OrderDetails />
@@ -35,8 +40,8 @@ function App() {
       </main>
     </>
   ) : (
-    <p>Загрузка...</p>
-  );
+    loading && <p>Loading...</p> || error && <p>{error}</p>
+  )
 }
 
 export default App;

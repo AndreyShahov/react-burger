@@ -4,23 +4,24 @@ import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktiku
 import { PropTypes } from 'prop-types';
 import { item } from '../burger-ingredients/burger-ingredients';
 import { useSelector } from 'react-redux';
+import { useDrop } from 'react-dnd';
 
 export default function BurgerConstructor({ setIsModal }) {
-  const ingredients = useSelector(state => state.ingredientsReducer.items);
+  const constructor = useSelector(state => state.constructorReducer.items);
 
   const bun = useMemo(
-    () => ingredients.data.find(item => item.type == 'bun'),
-    [ingredients]
+    () => constructor.data.find(item => item.type == 'bun'),
+    [constructor]
   );
 
   const sauceArray = useMemo(
-    () => ingredients.data.filter(item => item.type == 'sauce'),
-    [ingredients]
+    () => constructor.data.filter(item => item.type == 'sauce'),
+    [constructor]
   );
 
   const mainArray = useMemo(
-    () => ingredients.data.filter(item => item.type == 'main'),
-    [ingredients]
+    () => constructor.data.filter(item => item.type == 'main'),
+    [constructor]
   );
 
   function handleCLick() {
@@ -94,3 +95,4 @@ BurgerConstructor.propTypes = {
     data: PropTypes.arrayOf(item)
   })
 };
+

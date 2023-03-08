@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchIngredients = createAsyncThunk(
-  'ingredients/fetchIngredients',
+export const fetchConstructor = createAsyncThunk(
+  'constructor/fetchConstructor',
   async function (_, { rejectWithValue }) {
     try {
       const response = await fetch('https://norma.nomoreparties.space/api/ingredients');
@@ -10,8 +10,8 @@ export const fetchIngredients = createAsyncThunk(
         throw new Error('Server Error');
       }
 
-      const data = await response.json();
-      
+       const data = await response.json();
+
       return data;
 
     } catch (error) {
@@ -26,28 +26,30 @@ const initialState = {
   error: false
 }
 
-export const ingredientsSlice = createSlice({
-  name: 'ingredients',
+export const constructorSlice = createSlice({
+  name: 'constructor',
   initialState,
-  reducers: {},
+  reducers: {
+    setItems(state, action) {
+      state.items = action.payload;
+    }
+  },
   extraReducers: {
-    [fetchIngredients.pending]: (state) => {
+    [fetchConstructor.pending]: (state) => {
       state.loading = true;
       state.error = false;
-      state.items = null;
     },
-    [fetchIngredients.fulfilled]: (state, action) => {
+    [fetchConstructor.fulfilled]: (state, action) => {
       state.loading = false;
       state.items = action.payload;
 
     },
-    [fetchIngredients.rejected]: (state, action) => {
+    [fetchConstructor.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload;
-      state.items = null;
+      state.error = true;
     }
 
   }
 })
 
-export default ingredientsSlice.reducer;
+export default constructorSlice.reducer;
