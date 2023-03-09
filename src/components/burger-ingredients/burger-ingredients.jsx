@@ -57,21 +57,21 @@ export default function BurgerIngredients() {
         <IngredientCategory
           ingredientRef={bunRef}
           header={'Булки'}
-          bunArray={bunArray}
+          array={bunArray}
           setIsModal={setIsModal}
           onIngredientClick={setIngredientInModal}
         />
         <IngredientCategory
           ingredientRef={sauceRef}
           header={'Соусы'}
-          bunArray={sauceArray}
+          array={sauceArray}
           setIsModal={setIsModal}
           onIngredientClick={setIngredientInModal}
         />
         <IngredientCategory
           ingredientRef={mainRef}
           header={'Начинки'}
-          bunArray={mainArray}
+          array={mainArray}
           setIsModal={setIsModal}
           onIngredientClick={setIngredientInModal}
         />
