@@ -8,6 +8,8 @@ import { Modal } from '../modal/modal.jsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchIngredients } from '../../services/slices/ingredientsSlice.js';
 import { fetchConstructor } from '../../services/slices/constructorSlice';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 function App() {
   const ingredients = useSelector(state => state.ingredientsReducer.items);
@@ -26,8 +28,7 @@ function App() {
 
   return ingredients ? (
     ingredients &&
-    <>
-
+    <DndProvider backend={HTML5Backend}>
       {error && <p>An error occured: {error}</p>}
       <AppHeader />
       <main className={appStyles.main}>
@@ -38,7 +39,7 @@ function App() {
             <OrderDetails />
           </Modal>}
       </main>
-    </>
+    </DndProvider>
   ) : (
     loading && <p>Loading...</p> || error && <p>{error}</p>
   )

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import constructorStyles from './burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { PropTypes } from 'prop-types';
@@ -8,6 +8,23 @@ import { useDrop } from 'react-dnd';
 
 export default function BurgerConstructor({ setIsModal }) {
   const constructor = useSelector(state => state.constructorReducer.items);
+
+  const [board, setBoard] = useState([
+
+  ]);
+
+  const [{ isOver }, drop] = useDrop(() => ({
+    accept: 'NEW_INGREDIENT',
+    drop: item => addToConstructor(item.id),
+    collect: monitor => ({
+      isOver: !!monitor.isOver(),
+    })
+  }));
+
+  const addToConstructor = (id) => {
+    const ingredientsList = constructor.data.filter(item => id === item._id);
+    setBoard(board => [...board, ingredientsList[0]]);
+  }
 
   const bun = useMemo(
     () => constructor.data.find(item => item.type == 'bun'),
@@ -39,8 +56,23 @@ export default function BurgerConstructor({ setIsModal }) {
           thumbnail={bun.image_mobile}
         />
       </div>
-      <ul className={constructorStyles.container}>
-        {mainArray.map(item => {
+      <ul className={constructorStyles.container} ref={drop}>
+        {board.map(item => {
+          return (
+            <li className={constructorStyles.component} key={item['_id']}>
+              <DragIcon type="primary" />
+              <ConstructorElement
+                text={item.name}
+                price={item.price}
+                thumbnail={item.image_mobile}
+              />
+            </li>
+          )
+        })}
+
+
+
+        {/* {mainArray.map(item => {
           return (
             <li className={constructorStyles.component} key={item['_id']}>
               <DragIcon type="primary" />
@@ -63,7 +95,7 @@ export default function BurgerConstructor({ setIsModal }) {
               />
             </li>
           )
-        })}
+        })} */}
       </ul>
       <div className="mr-4">
         <ConstructorElement

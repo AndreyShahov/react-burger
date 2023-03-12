@@ -1,17 +1,26 @@
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientStyles from "./burger-ingredient.module.css";
 import PropTypes from 'prop-types';
+import { useDrag } from "react-dnd";
 
 export default function BurgerIngredient({ ingredientData, count, onClick, setIsModal }) {
-  const { image, price, name } = ingredientData;
+  const { image, price, name, _id } = ingredientData;
 
   function handleClick() {
     onClick(ingredientData);
     setIsModal(true);
   }
 
+  const [{isDragging}, drag] = useDrag(() => ({
+    type: 'NEW_INGREDIENT',
+    item: {id: _id},
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    })
+  }));
+
   return (
-    <ul className={ingredientStyles.card} onClick={handleClick}>
+    <ul ref={drag} className={ingredientStyles.card} onClick={handleClick}>
       <li className={ingredientStyles.image}><img src={image} alt={name} /></li>
       <li className={ingredientStyles.box}>
         <p className={`${ingredientStyles.price} text text_type_digits-default`}>{price}</p>
@@ -32,3 +41,4 @@ BurgerIngredient.propTypes = {
   onClick: PropTypes.func,
   setIsModal: PropTypes.func
 };
+
