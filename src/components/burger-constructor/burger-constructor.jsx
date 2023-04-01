@@ -1,17 +1,17 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import constructorStyles from './burger-constructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { PropTypes } from 'prop-types';
 import { item } from '../burger-ingredients/burger-ingredients';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
+import { setBoard, removeItem } from '../../services/slices/constructorSlice';
+import { increaseCounter, decreaseCounter } from '../../services/slices/ingredientsSlice';
 
 export default function BurgerConstructor({ setIsModal }) {
-  const constructor = useSelector(state => state.constructorReducer.items);
-
-  const [board, setBoard] = useState([
-
-  ]);
+  const board = useSelector(state => state.constructorReducer.board);
+  const constructor = useSelector(state => state.ingredientsReducer.items)
+  const dispatch = useDispatch();
 
   const [{ isOver }, drop] = useDrop(() => ({
     accept: 'NEW_INGREDIENT',
@@ -22,22 +22,13 @@ export default function BurgerConstructor({ setIsModal }) {
   }));
 
   const addToConstructor = (id) => {
-    const ingredientsList = constructor.data.filter(item => id === item._id);
-    setBoard(board => [...board, ingredientsList[0]]);
+    const ingredientsList = constructor.filter(item => id === item._id);
+    dispatch(setBoard(ingredientsList[0]));
+    dispatch(increaseCounter(ingredientsList[0]));
   }
 
   const bun = useMemo(
-    () => constructor.data.find(item => item.type == 'bun'),
-    [constructor]
-  );
-
-  const sauceArray = useMemo(
-    () => constructor.data.filter(item => item.type == 'sauce'),
-    [constructor]
-  );
-
-  const mainArray = useMemo(
-    () => constructor.data.filter(item => item.type == 'main'),
+    () => constructor.find(item => item.type == 'bun'),
     [constructor]
   );
 
@@ -57,7 +48,7 @@ export default function BurgerConstructor({ setIsModal }) {
         />
       </div>
       <ul className={constructorStyles.container} ref={drop}>
-        {board.map(item => {
+        {board ? board.map(item => {
           return (
             <li className={constructorStyles.component} key={item['_id']}>
               <DragIcon type="primary" />
@@ -65,37 +56,14 @@ export default function BurgerConstructor({ setIsModal }) {
                 text={item.name}
                 price={item.price}
                 thumbnail={item.image_mobile}
+                handleClose={() => {
+                  dispatch(removeItem(item._id));
+                  dispatch (decreaseCounter(item._id));
+                }}
               />
             </li>
           )
-        })}
-
-
-
-        {/* {mainArray.map(item => {
-          return (
-            <li className={constructorStyles.component} key={item['_id']}>
-              <DragIcon type="primary" />
-              <ConstructorElement
-                text={item.name}
-                price={item.price}
-                thumbnail={item.image_mobile}
-              />
-            </li>
-          )
-        })}
-        {sauceArray.map(item => {
-          return (
-            <li className={constructorStyles.component} key={item['_id']}>
-              <DragIcon type="primary" />
-              <ConstructorElement
-                text={item.name}
-                price={item.price}
-                thumbnail={item.image_mobile}
-              />
-            </li>
-          )
-        })} */}
+        }) : false}
       </ul>
       <div className="mr-4">
         <ConstructorElement

@@ -1,55 +1,28 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
-export const fetchConstructor = createAsyncThunk(
-  'constructor/fetchConstructor',
-  async function (_, { rejectWithValue }) {
-    try {
-      const response = await fetch('https://norma.nomoreparties.space/api/ingredients');
-
-      if (!response.ok) {
-        throw new Error('Server Error');
-      }
-
-       const data = await response.json();
-
-      return data;
-
-    } catch (error) {
-      return (rejectWithValue(error.message));
-    }
-  }
-);
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  items: null,
-  loading: false,
-  error: false
+  board: [],
+  isModal: false,
 }
 
 export const constructorSlice = createSlice({
   name: 'constructor',
   initialState,
   reducers: {
-    setItems(state, action) {
-      state.items = action.payload;
-    }
-  },
-  extraReducers: {
-    [fetchConstructor.pending]: (state) => {
-      state.loading = true;
-      state.error = false;
+    setBoard(state, action) {
+      state.board = [
+        ...state.board,
+        action.payload
+      ]
     },
-    [fetchConstructor.fulfilled]: (state, action) => {
-      state.loading = false;
-      state.items = action.payload;
-
+    removeItem(state, action) {
+      state.board = state.board.filter(item => item._id !== action.payload);
     },
-    [fetchConstructor.rejected]: (state, action) => {
-      state.loading = false;
-      state.error = true;
+    setIsModal(state, action) {
+      state.isModal = action.payload;
     }
-
   }
-})
+});
 
+export const { setBoard, removeItem, setIsModal } = constructorSlice.actions;
 export default constructorSlice.reducer;

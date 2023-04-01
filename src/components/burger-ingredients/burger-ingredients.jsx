@@ -1,4 +1,4 @@
-import { useRef, useState, useMemo } from 'react'
+import { useRef, useState, useMemo, createContext } from 'react'
 import ingredientsStyles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Modal } from '../modal/modal';
@@ -9,9 +9,9 @@ import { useSelector } from 'react-redux';
 
 export default function BurgerIngredients() {
   const ingredients = useSelector(state => state.ingredientsReducer.items);
+  const isModal = useSelector(store => store.constructorReducer.isModal);
 
   const [current, setCurrent] = useState('one');
-  const [isModal, setIsModal] = useState(false);
 
   const bunRef = useRef(null);
   const sauceRef = useRef(null);
@@ -20,17 +20,17 @@ export default function BurgerIngredients() {
   const [ingredientInModal, setIngredientInModal] = useState(null);
 
   const bunArray = useMemo(
-    () => ingredients.data.filter(item => item.type == 'bun'),
+    () => ingredients.filter(item => item.type == 'bun'),
     [ingredients]
   );
 
   const sauceArray = useMemo(
-    () => ingredients.data.filter(item => item.type == 'sauce'),
+    () => ingredients.filter(item => item.type == 'sauce'),
     [ingredients]
   );
 
   const mainArray = useMemo(
-    () => ingredients.data.filter(item => item.type == 'main'),
+    () => ingredients.filter(item => item.type == 'main'),
     [ingredients]
   );
 
@@ -54,35 +54,35 @@ export default function BurgerIngredients() {
         </Tab>
       </div>
       <ul className={`${ingredientsStyles.menu} ml-4`}>
+
         <IngredientCategory
           ingredientRef={bunRef}
           header={'Булки'}
           array={bunArray}
-          setIsModal={setIsModal}
           onIngredientClick={setIngredientInModal}
         />
         <IngredientCategory
           ingredientRef={sauceRef}
           header={'Соусы'}
           array={sauceArray}
-          setIsModal={setIsModal}
           onIngredientClick={setIngredientInModal}
         />
         <IngredientCategory
           ingredientRef={mainRef}
           header={'Начинки'}
           array={mainArray}
-          setIsModal={setIsModal}
           onIngredientClick={setIngredientInModal}
         />
+
       </ul>
-      {isModal &&
-        <Modal header="Детали ингредиента" setIsModal={setIsModal}>
+
+      {
+        isModal &&
+        <Modal header="Детали ингредиента" >
           <IngredientDetails {...ingredientInModal} />
-        </Modal>}
-    </section>
-
-
+        </Modal>
+      }
+    </section >
   )
 }
 
